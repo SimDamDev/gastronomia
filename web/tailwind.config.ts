@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
+import lineClamp from '@tailwindcss/line-clamp'
 
-export default {
+const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,5 +10,7 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
-} satisfies Config
+  plugins: [lineClamp],
+}
+
+export default config

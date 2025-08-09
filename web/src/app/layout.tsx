@@ -1,5 +1,7 @@
 import '../styles/globals.css';
 import type { Metadata } from 'next';
+import { NavBar } from '@/components/NavBar';
+import { Providers } from '@/components/Providers';
 
 export const metadata: Metadata = {
   title: 'Gastronomia',
@@ -9,7 +11,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
-      <body className="min-h-screen bg-white text-gray-900">{children}</body>
+      <body className="min-h-screen bg-white text-gray-900">
+        <Providers>
+          <NavBar />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
