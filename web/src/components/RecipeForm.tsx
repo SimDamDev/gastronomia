@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from 'react';
-import { validateRecipe } from '@/domain/validateRecipe';
+import { validateRecipeWithZod } from '@/domain/recipeSchema';
 import type { Difficulty, RecipeCreateInput } from '@/types/recipe';
 
 export interface RecipeFormProps {
@@ -40,10 +40,10 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ mode, initial, onSuccess
     imageUrl: imageUrl || undefined,
   }), [title, description, totalMinutes, difficulty, ingredientsText, stepsText, imageUrl]);
 
-  const clientErrors = useMemo(() => validateRecipe(payload).errors, [payload]);
+  const clientErrors = useMemo(() => validateRecipeWithZod(payload).errors, [payload]);
 
   const handleSubmit = async () => {
-    const validation = validateRecipe(payload);
+    const validation = validateRecipeWithZod(payload);
     if (!validation.isValid) {
       setErrors(validation.errors);
       return;

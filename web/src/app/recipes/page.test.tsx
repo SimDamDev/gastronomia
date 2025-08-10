@@ -40,4 +40,29 @@ describe('Recipes page (search/filter)', () => {
     const hasParams = urls.some((u: string) => u.includes('/api/recipes?') && u.includes('maxTime=30') && u.includes('difficulty=easy'));
     expect(hasParams).toBe(true);
   });
+
+  it('affiche un état de chargement puis les résultats', async () => {
+    let resolveJson: any;
+    (global.fetch as jest.Mock).mockImplementationOnce(() => {
+      return new Promise((resolve) => {
+        setTimeout(() => resolve({ ok: true, json: async () => [{ id: 'r1', title: 'Salade', totalMinutes: 5, difficulty: 'easy' }] }), 10);
+      });
+    });
+
+    render(<RecipesPage />);
+    expect(screen.getByText(/chargement/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByText(/chargement/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/Salade/i)).toBeInTheDocument();
+    });
+  });
+
+  it('affiche un message d’erreur si le fetch échoue', async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce({ ok: false, json: async () => ({}) });
+    render(<RecipesPage />);
+    await waitFor(() => {
+      expect(screen.getByText(/erreur de chargement/i)).toBeInTheDocument();
+    });
+  });
 });

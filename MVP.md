@@ -18,8 +18,12 @@ Objectif: livrer en 1–2 itérations un produit fonctionnel concentré sur la d
 - [x] Données persistées: recettes complètes
 - [x] CRUD réservés aux utilisateurs connectés (implémenté)
 - [x] Recherche basique et filtre
-- [x] UI responsive minimale (mobile ≥ 360px)
-- [ ] Déploiement (Vercel) + DB managée
+ - [x] UI responsive minimale (mobile ≥ 360px)
+ - [ ] Déploiement (Vercel + DB managée)
+   - [x] Vercel: variables d’environnement (Prod/Preview)
+   - [x] Supabase: base provisionnée + URLs pooler/direct validées
+   - [ ] Déploiement prod (build vert)
+   - [ ] Smoke tests post-déploiement
 
 ## 🎯 Critères d’acceptation (mesurables)
 - [ ] Un visiteur peut voir la page d’accueil avec des recettes « récentes » (seed) en < 2s sur réseau local
@@ -32,26 +36,26 @@ Objectif: livrer en 1–2 itérations un produit fonctionnel concentré sur la d
 
 ## 🧪 TDD – Plan de tests minimal
 - [x] Domain: validateRecipe (unit)
-- [ ] API: POST /api/recipes (integration)
-- [ ] API: GET /api/recipes (integration)
+- [x] API: POST /api/recipes (integration)
+- [x] API: GET /api/recipes (integration)
 - [x] UI: `RecipeList` – test
 - [x] UI: `RecipeForm` – test
 - [x] UI: `RecipeDetail` – test
-- [ ] UI: `Recipes page` – test
-- [ ] Accessibility: `page.tsx` – jest-axe
+- [x] UI: `Recipes page` – test
+- [x] Accessibility: `page.tsx` – jest-axe
 
 ## 🏗️ Périmètre technique (SOLID/DRY)
 - [x] Types partagés + schéma Prisma + relations
 - [x] API Routes CRUD recettes
 - [x] UI complétée pour MVP: liste, détail, recherche, création, édition, suppression
 - [x] Auth Credentials + protections
-- [ ] Services (application): `RecipeService`, `AuthService`
-- [ ] Validations: Zod côté client
+- [x] Services (application): `RecipeService`, `AuthService`
+- [x] Validations: Zod côté client
 
 ## 📦 Tâches ordonnées (checklist d’exécution)
 ### 0) Setup qualité (CI/CD & tests)
-- [ ] GitHub Actions: lint, test, build
-- [ ] Rapport coverage Jest + jest-axe
+- [x] GitHub Actions: lint, test, build
+- [x] Rapport coverage Jest + jest-axe
 - [ ] ESLint/Prettier stricts
 
 ### 1) Base de données & ORM

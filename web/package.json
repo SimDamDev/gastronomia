@@ -5,6 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "dev:local:db": "set PRISMA_SCHEMA=./prisma/schema.dev.prisma&& npx prisma generate --schema=./prisma/schema.dev.prisma && npx prisma migrate deploy --schema=./prisma/schema.dev.prisma && ts-node ./prisma/seed.ts",
+    "dev:local": "set PRISMA_SCHEMA=./prisma/schema.dev.prisma&& next dev",
+    "pg:up": "docker compose up -d",
+    "pg:down": "docker compose down -v",
+    "pg:logs": "docker compose logs -f",
+    "pg:env": "echo DATABASE_URL=postgresql://postgres:postgres@localhost:5433/gastr_local?sslmode=disable > .env.local",
+    "pg:reset": "npm run pg:down && npm run pg:up && timeout 3 > NUL && npx prisma generate && npx prisma migrate deploy && ts-node ./prisma/seed.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -18,7 +25,7 @@
     "db:setup": "prisma generate && prisma migrate dev --name init --skip-seed && ts-node ./prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "5.19.1",
+    "@prisma/client": "^6.13.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "bcryptjs": "2.4.3",
     "next": "14.2.5",
@@ -44,7 +51,7 @@
     "jest-axe": "^7.0.1",
     "jest-environment-jsdom": "29.7.0",
     "postcss": "8.4.41",
-    "prisma": "5.19.1",
+    "prisma": "^6.13.0",
     "supertest": "^6.3.4",
     "tailwindcss": "3.4.10",
     "ts-node": "^10.9.2",

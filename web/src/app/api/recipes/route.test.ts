@@ -86,6 +86,21 @@ describe('/api/recipes handlers', () => {
     expect(prisma.recipe.create).toHaveBeenCalled();
   });
 
+  it('POST retourne 400 si payload invalide', async () => {
+    getServerSession.mockResolvedValueOnce({ user: { id: 'u1', email: 'u@x.com' } });
+    const req = new Request('http://localhost/api/recipes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: 'a', ingredients: [], steps: [], totalMinutes: 0, difficulty: 'invalid' }),
+    } as any);
+
+    const res = (await POST(req)) as NextResponse;
+    expect(res.status).toBe(400);
+    const json = await (res as any).json();
+    expect(Array.isArray(json.errors)).toBe(true);
+    expect(json.errors.length).toBeGreaterThan(0);
+  });
+
   it('GET retourne une liste', async () => {
     prisma.recipe.findMany.mockResolvedValueOnce([{ id: 'r1' }]);
     const req = new Request('http://localhost/api/recipes') as any;

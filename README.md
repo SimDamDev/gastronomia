@@ -1,5 +1,7 @@
 # 🍽️ Gastronomia - Site de Recettes Gastronomiques
 
+![Coverage](https://img.shields.io/badge/coverage-Codecov-blue)
+
 Une plateforme moderne et intuitive pour partager, découvrir et organiser des recettes de cuisine, développée avec une approche **TDD**, **SOLID** et **DRY**.
 
 ## 🎯 Vision
