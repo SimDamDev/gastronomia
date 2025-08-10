@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint -- --no-error-on-unmatched-pattern
+        run: npm run lint
 
       - name: Test
         run: npm test -- --runInBand --coverage
